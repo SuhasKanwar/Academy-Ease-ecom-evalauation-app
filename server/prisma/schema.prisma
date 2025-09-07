@@ -84,3 +84,25 @@ model Wishlist {
   user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
 }
+
+model ProductTrend {
+  id              String   @id @default(uuid())
+  date            DateTime
+  totalProducts   Int      @default(0)
+  productsAdded   Int      @default(0)
+  productsRemoved Int      @default(0)
+
+  @@index([date])
+  @@map("product_trends")
+}
+
+model VisitorLog {
+  id        String   @id @default(uuid())
+  visitedAt DateTime @default(now())
+  ip        String?
+  userAgent String?
+  path      String?
+
+  @@index([visitedAt])
+  @@map("visitor_logs")
+}
